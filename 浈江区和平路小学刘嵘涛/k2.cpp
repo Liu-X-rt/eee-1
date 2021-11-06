@@ -1,0 +1,63 @@
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+#include<string>
+using namespace std;
+int i,j,s=0,t=0,ln,lx,ly,sum=0,a[100001],b[100001],c[100001],jw=0;
+string x,y,z="";
+int main()
+{
+	cin>>x>>y;
+	lx=x.size();
+	ly=y.size();
+	memset(a,0,100001);
+	memset(b,0,100001);
+	memset(c,0,100001);
+	for(i=0;i<lx;i++)a[lx-i]=x[i]-'0';
+	for(i=0;i<ly;i++)b[ly-i]=y[i]-'0';
+	if(ly>=lx)
+	{
+		if(ly==lx)
+		{
+			i=ly;
+		    while(b[i]<=a[i]&&i!=0)i--;
+		    if(i>0)
+			{
+		    	cout<<"-";
+		    	s=1;
+			}
+		}
+		if(ly>lx)
+		{
+			cout<<"-";
+			s=1;
+			ln=lx;
+			lx=ly;
+			ly=ln;
+		}
+	}
+	for(i=1;i<=lx;i++)
+	{
+		if(s==0)
+		{
+			c[i]=a[i]-b[i];
+			if(a[i]<b[i])
+			{
+				a[i+1]-=1;
+				c[i]+=10;
+			}
+		}
+		if(s==1)
+		{
+			c[i]=b[i]-a[i];
+			if(b[i]<a[i])
+			{
+				b[i+1]-=1;
+				c[i]+=10;
+			}
+		}
+	}
+	while(c[lx]==0&&lx>1)lx--;
+	for(i=lx;i>=1;i--)cout<<c[i];
+	return 0;
+}
